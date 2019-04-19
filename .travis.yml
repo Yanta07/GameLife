@@ -1,0 +1,14 @@
+# Тут указывается используемый в проекте язык программирования, можно указать несколько
+language: c
+dist: xenial
+compiler: clang
+sudo: false
+script: 
+ - git ls-files src/ | xargs clang-format -i src/*.c 
+ - git diff --exit-code
+ - make
+ - make test
+ - ./bin/test
+ 
+
+ 
