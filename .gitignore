@@ -1,0 +1,18 @@
+# Root is the location of the .gitignore file
+# Ignore list of project files
+# ---- SPECIFIC FILES ----
+input. *
+output. *
+
+# ---- EXTENSION UP TO ----
+* .log
+* .o
+* .json
+\ .vscode *
+* .txt
+* .bin
+* .ipch
+
+# ---- DIRRECTORIES ----
+bin /
+build /
