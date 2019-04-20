@@ -5,22 +5,20 @@ CC=clang
 OUT=build/
 EXE=bin/
 SRC=src/
+LIBS=-lSDL
 
 all: bin build $(EXE)main
 
-$(EXE)main: 
-	$(CC) $(CCFLAGS) $< -o $@
+$(EXE)main: $(SRC)main.c
+	$(CC) $(CCFLAGS) $< ${LIBS} -o $@
 
 bin: 
 	mkdir -p bin 
 
-bin/pages:
-	cp -r pages bin
-
 build:
 	mkdir -p build
 
-$(OUT)%.o: $(SRC)%.c 
+%.o: $(SRC)%.c 
 	$(CC) $(CCFLAGS) -MP -MMD -c -o $@ $<
 
 clean:
@@ -28,12 +26,12 @@ clean:
 
 #-----------------------------tests------------------------------
 
-$(OUT)maint.o: all
-	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
-	
-$(OUT)board_test.o:
-	$(CC) $(CCFLAGS) test/board_test.c -c -o $(OUT)board_test.o
-	
-
-test: $(OUT)maint.o  $(OUT)board_test.o $(ALLOBJ) 
-	$(CC) $(CCFLAGS) $(OUT)maint.o $(OUT)board_test.o  $(ALLOBJT) -o bin/test
+#$(OUT)maint.o: all
+#	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
+#	
+#$(OUT)board_test.o:
+#	$(CC) $(CCFLAGS) test/board_test.c -c -o $(OUT)board_test.o
+#	
+#
+#test: $(OUT)maint.o  $(OUT)board_test.o $(ALLOBJ) 
+#	$(CC) $(CCFLAGS) $(OUT)maint.o $(OUT)board_test.o  $(ALLOBJT) -o bin/test
