@@ -14,5 +14,6 @@ output. *
 * .ipch
 
 # ---- DIRRECTORIES ----
-bin /
-build /
+bin/*
+build/*
+.vscode/*
