@@ -1,5 +1,7 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
-before_install: sudo apt install SDL*
+before_install: 
+ - sudo apt-get install libsdl2-2.0
+ - sudo apt-get install libsdl2-dev
 language: c
 dist: xenial
 compiler: clang
