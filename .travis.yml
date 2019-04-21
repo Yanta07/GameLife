@@ -1,14 +1,11 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
+before_install: sudo yum install SDL*
 language: c
 dist: xenial
 compiler: clang
-sudo: false
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
  - git diff --exit-code
- - make
- - make test
- - ./bin/test
- 
+ - make 
 
  
