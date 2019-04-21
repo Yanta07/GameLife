@@ -5,6 +5,7 @@ CC=clang
 OUT=build/
 EXE=bin/
 SRC=src/
+LIBS=-lSDL
 
 all: bin build $(EXE)main
 
@@ -13,9 +14,6 @@ $(EXE)main:
 
 bin: 
 	mkdir -p bin 
-
-bin/pages:
-	cp -r pages bin
 
 build:
 	mkdir -p build
@@ -28,12 +26,12 @@ clean:
 
 #-----------------------------tests------------------------------
 
-$(OUT)maint.o: all
-	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
-	
-$(OUT)board_test.o:
-	$(CC) $(CCFLAGS) test/board_test.c -c -o $(OUT)board_test.o
-	
-
-test: $(OUT)maint.o  $(OUT)board_test.o $(ALLOBJ) 
-	$(CC) $(CCFLAGS) $(OUT)maint.o $(OUT)board_test.o  $(ALLOBJT) -o bin/test
+#$(OUT)maint.o: all
+#	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
+#	
+#$(OUT)board_test.o:
+#	$(CC) $(CCFLAGS) test/board_test.c -c -o $(OUT)board_test.o
+#	
+#
+#test: $(OUT)maint.o  $(OUT)board_test.o $(ALLOBJ) 
+#	$(CC) $(CCFLAGS) $(OUT)maint.o $(OUT)board_test.o  $(ALLOBJT) -o bin/test
