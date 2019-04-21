@@ -9,7 +9,7 @@ SRC=src/
 all: bin build $(EXE)main
 
 $(EXE)main: 
-	$(CC) $(CCFLAGS) $< -o $@
+	$(CC) $(CCFLAGS) $< -lSDL -o $@
 
 bin: 
 	mkdir -p bin 
@@ -21,7 +21,7 @@ build:
 	mkdir -p build
 
 $(OUT)%.o: $(SRC)%.c 
-	$(CC) $(CCFLAGS) -MP -MMD -c -o $@ $<
+	$(CC) $(CCFLAGS) -MP -MMD -lSDL -c -o $@ $<
 
 clean:
 	rm -rf bin build
