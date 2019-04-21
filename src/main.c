@@ -7,7 +7,6 @@
 
 int main(void)
 {
-    SDL_Event event;
     SDL_Init(SDL_INIT_VIDEO);
     SDL_WM_SetCaption("Game of Life", NULL);
     SDL_Surface* screen
