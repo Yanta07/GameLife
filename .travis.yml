@@ -1,8 +1,7 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
- addons:
-  apt:
-    packages:
-    - libsdl2-dev
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y libsdl2-dev
 
 language: c
 dist: xenial
