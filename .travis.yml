@@ -6,6 +6,7 @@
 
 language: c
 dist: xenial
+os: ubuntu
 compiler: clang
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
