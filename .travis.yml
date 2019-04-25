@@ -4,6 +4,7 @@ dist: xenial
 os: linux
 compiler: gcc
 before_install:
+    - sudo apt-get upgrade
     - wget https://www.libsdl.org/release/SDL2-2.0.5.tar.gz -O SDL2-2.0.5.tar.gz
     - tar -xzvf SDL2-2.0.5.tar.gz
 install:
