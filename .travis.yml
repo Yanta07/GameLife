@@ -1,12 +1,16 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y libsdl2-dev
-
 language: c
 dist: xenial
-os: ubuntu
-compiler: clang
+os: linux
+compiler: gcc
+before_install:
+# Download, make and install SDL2-2.0.8 (stable)
+- |
+  travis_retry curl -L https://www.libsdl.org/release/SDL2-2.0.8.tar.gz | tar xz
+  cd SDL2-2.0.8
+  ./configure
+  make
+  sudo make install
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
  - git diff --exit-code
