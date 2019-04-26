@@ -4,8 +4,8 @@ dist: xenial
 os: fedora
 compiler: gcc
 before_install:
-    sudo apt update
-    sudo apt install SDL SDL_image SDL_mixer SDL_ttf portmidi
+    - sudo apt update
+    - sudo apt install SDL SDL_image SDL_mixer SDL_ttf portmidi
 
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
