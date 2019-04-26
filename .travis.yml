@@ -1,9 +1,10 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
 language: c
 dist: xenial
-os: linux
+os: fedora
 compiler: gcc
 before_install:
+    sudo apt update
     sudo apt install SDL SDL_image SDL_mixer SDL_ttf portmidi
 
 script: 
