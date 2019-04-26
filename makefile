@@ -25,7 +25,6 @@ clean:
 	rm -rf bin build
 
 #-----------------------------tests------------------------------
-
 #$(OUT)maint.o: all
 #	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
 #	
