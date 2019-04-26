@@ -10,7 +10,7 @@ LIBS=-lSDL
 all: bin build $(EXE)main
 
 $(EXE)main: $(OUT)main.o 
-	$(CC) $(CCFLAGS) $< -lSDL -o $@
+	$(CC) $(CCFLAGS) $< $(LIBS) -o $@
 
 bin: 
 	mkdir -p bin 
@@ -19,7 +19,7 @@ build:
 	mkdir -p build
 
 $(OUT)%.o: $(SRC)%.c 
-	$(CC) $(CCFLAGS) -MP -MMD -c -o $@ $<
+	$(CC) $(CCFLAGS) -MP -MMD $(LIBS) -c -o $@ $<
 
 clean:
 	rm -rf bin build
