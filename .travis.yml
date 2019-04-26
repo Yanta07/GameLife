@@ -4,11 +4,8 @@ dist: xenial
 os: linux
 compiler: gcc
 before_install:
-    - sudo apt-get update
-    - sudo apt-get upgrade
     - wget https://www.libsdl.org/release/SDL2-2.0.5.tar.gz -O SDL2-2.0.5.tar.gz
     - tar -xzvf SDL2-2.0.5.tar.gz
-    - sudo apt install SDL SDL_image SDL_mixer SDL_ttf portmidi
 install:
    - (cd SDL2-2.0.5 && ./configure && make && sudo make install)
 script: 
