@@ -1,11 +1,11 @@
 .PHONY: clean
 .PHONY: test
 CCFLAGS=-Wall
-CC=clang
+CC=gcc
 OUT=build/
 EXE=bin/
 SRC=src/
-LIBS=-lSDL
+LIBS=-lSDL2
 
 all: bin build $(EXE)main
 

@@ -1,11 +1,12 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
 language: c
 dist: xenial
+os: 
 compiler: gcc
-before_install:
-    - sudo apt update
-    - sudo apt install SDL SDL_image SDL_mixer SDL_ttf portmidi
-
+    - wget https://www.libsdl.org/release/SDL2-2.0.5.tar.gz -O SDL2-2.0.5.tar.gz
+    - tar -xzvf SDL2-2.0.5.tar.gz
+install:
+   - (cd SDL2-2.0.5 && ./configure && make && sudo make install)
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
  - git diff --exit-code
