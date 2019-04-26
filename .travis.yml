@@ -1,7 +1,6 @@
 # Тут указывается используемый в проекте язык программирования, можно указать несколько
 language: c
 dist: xenial
-os: fedora
 compiler: gcc
 before_install:
     - sudo apt update
