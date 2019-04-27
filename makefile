@@ -3,7 +3,7 @@
 .PHONY: all
 CC = gcc
 CFLAGS = -Wall #-Wextra -Werror -Wshadow
-DEPFLAGS = -MMD -MP
+DEPFLAGS = -MP -MMD 
 DEPDIR = dep/
 OBJDIR = build/
 BINDIR = bin/
@@ -19,11 +19,11 @@ $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(LIBS) -o $@ $^
  
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(DEPFLAGS) $< $(LIBS) -c -o $@
  
 dirs:
-	mkdir -p $(OBJDIR) $(BINDIR)
+	mkdir -p $(OBJDIR) 
+	mkdir -p $(BINDIR)
  
 clean:
 	rm -f $(BINDIR)* $(OBJDIR)*
-   
