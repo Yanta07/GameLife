@@ -1,7 +1,7 @@
 .PHONY: test
 .PHONY: clean
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Wshadow
+CFLAGS = -Wall #-Wextra -Werror -Wshadow
 DEPFLAGS = -MMD -MP
 DEPDIR = dep/
 OBJDIR = build/
@@ -13,8 +13,6 @@ OBJ_FILES := $(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRC_FILES))
 DEP_FILES := $(wildcard $(DEPDIR)*.d)
 EXECUTABLE = $(BINDIR)main
  
- 
-.PHONY: all
 all: dirs $(EXECUTABLE)
  
 $(EXECUTABLE): $(OBJ_FILES)
