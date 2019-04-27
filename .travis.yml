@@ -12,5 +12,11 @@ script:
  - git ls-files src/ | xargs clang-format -i src/*.c 
  - git diff --exit-code
  - make 
+notifications:
+  email:
+    recipients:
+      - liember@yandex.ru
+    on_success: never # default: change
+    on_failure: never # default: always
 
  
