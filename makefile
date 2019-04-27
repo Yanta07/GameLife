@@ -1,36 +1,32 @@
-.PHONY: clean
 .PHONY: test
-CCFLAGS=-Wall
-CC=gcc
-OUT=build/
-EXE=bin/
-SRC=src/
-LIBS=-lSDL2
+.PHONY: clean
+.PHONY: all
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -Wshadow
+DEPFLAGS = -MP -MMD 
+DEPDIR = dep/
+OBJDIR = build/
+BINDIR = bin/
+SRCDIR = src/
+LIBS = -lSDL2
+SRC_FILES := $(wildcard $(SRCDIR)*.c)
+OBJ_FILES := $(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRC_FILES))
+DEP_FILES := $(wildcard $(DEPDIR)*.d)
+EXECUTABLE = $(BINDIR)main
+ 
+all: dirs $(EXECUTABLE)
+ 
+$(EXECUTABLE): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $< $(LIBS) -o $@
+ 
+$(OBJDIR)%.o : $(SRCDIR)%.c
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $< 
+	mv -f $(OBJDIR)$*.d $(DEPDIR)$*.d
 
-all: bin build $(EXE)main
-
-$(EXE)main: $(OUT)main.o 
-	$(CC) $(CCFLAGS) $< $(LIBS) -o $@
-
-bin: 
-	mkdir -p bin 
-
-build:
-	mkdir -p build
-
-$(OUT)%.o: $(SRC)%.c 
-	$(CC) $(CCFLAGS) -MP -MMD $(LIBS) -c -o $@ $<
-
+dirs:
+	mkdir -p $(OBJDIR) $(BINDIR) $(DEPDIR)
+ 
 clean:
-	rm -rf bin build
-
-#-----------------------------tests------------------------------
-#$(OUT)maint.o: all
-#	$(CC) $(CCFLAGS) test/main.c -c -o $(OUT)maint.o
-#	
-#$(OUT)board_test.o:
-#	$(CC) $(CCFLAGS) test/board_test.c -c -o $(OUT)board_test.o
-#	
-#
-#test: $(OUT)maint.o  $(OUT)board_test.o $(ALLOBJ) 
-#	$(CC) $(CCFLAGS) $(OUT)maint.o $(OUT)board_test.o  $(ALLOBJT) -o bin/test
+	rm -f $(BINDIR)* $(OBJDIR)*.o $(DEPDIR)*.d
+   
+include $(DEP_FILES)
