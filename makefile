@@ -19,11 +19,11 @@ $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(LIBS) -o $@ $^
  
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(DEPFLAGS) $< $(LIBS) -c -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) $< $(LIBS) -c -o $@ 
  
 dirs:
-	mkdir -p $(OBJDIR) 
-	mkdir -p $(BINDIR)
+	mkdir -p bin
+	mkdir -p build
  
 clean:
 	rm -f $(BINDIR)* $(OBJDIR)*
