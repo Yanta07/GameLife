@@ -8,7 +8,7 @@ DEPDIR = dep/
 OBJDIR = build/
 BINDIR = bin/
 SRCDIR = src/
-LIBS=-lSDL2
+LIBS = -lSDL2
 SRC_FILES := $(wildcard $(SRCDIR)*.c)
 OBJ_FILES := $(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRC_FILES))
 EXECUTABLE = $(BINDIR)main
@@ -16,10 +16,10 @@ EXECUTABLE = $(BINDIR)main
 all: dirs $(EXECUTABLE)
  
 $(EXECUTABLE): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(LIBS) -o $@ $^
+	$(CC) $(CFLAGS) $< $(LIBS) -o $@
  
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(DEPFLAGS) $(LIBS) $< -c -o $@ 
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $< 
  
 dirs:
 	mkdir -p bin
