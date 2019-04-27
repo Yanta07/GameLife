@@ -21,7 +21,7 @@ $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(LIBS) -o $@ $^
  
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(CC) $(CCFLAGS) $(DEPFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $<
 	mv -f $(OBJDIR)$*.d $(DEPDIR)$*.d
  
 dirs:
