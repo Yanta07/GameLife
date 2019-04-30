@@ -17,7 +17,7 @@ EXECUTABLE = $(BINDIR)main
 all: dirs $(EXECUTABLE)
  
 $(EXECUTABLE): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $< $(LIBS) -o $@
+	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
  
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(LIBS) -c -o $@ $< 

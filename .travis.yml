@@ -6,6 +6,8 @@ compiler: gcc
 before_install:
     - wget https://www.libsdl.org/release/SDL2-2.0.5.tar.gz -O SDL2-2.0.5.tar.gz
     - tar -xzvf SDL2-2.0.5.tar.gz
+    - sudo apt update
+    - sudo apt install make
 install:
    - (cd SDL2-2.0.5 && ./configure && make && sudo make install)
 script: 
