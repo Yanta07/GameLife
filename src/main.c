@@ -1,22 +1,50 @@
-#include <SDL/SDL.h>
+#include "include/common.h"
+#include "include/visual.h"
+
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define scr_width 600
-#define scr_height 600
+const char* title = "Game of life";
+const int screen_width = 640;
+const int screen_height = 480;
 
-int main(void)
+int main()
 {
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_WM_SetCaption("Game of Life", NULL);
-    SDL_Surface* screen
-            = SDL_SetVideoMode(scr_width, scr_height, 0, SDL_SWSURFACE);
-    if (!screen) {
-        return EXIT_FAILURE;
+    int rows = 10;
+    int cols = 10;
+    if (SDL_Init(SDL_INIT_VIDEO) == 0) {
+        SDL_Window* window = NULL;
+        SDL_Renderer* renderer = NULL;
+        if (SDL_CreateWindowAndRenderer(
+                    screen_width, screen_height, 0, &window, &renderer)
+            == 0) {
+            SDL_bool done = SDL_FALSE;
+            SDL_SetWindowTitle(window, title);
+            while (!done) {
+                SDL_Event event;
+                SDL_SetRenderDrawColor(
+                        renderer, 110, 110, 110, SDL_ALPHA_OPAQUE);
+                SDL_RenderClear(renderer);
+                SDL_SetRenderDrawColor(
+                        renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+                initialize_grid(
+                        renderer, rows, cols, screen_width, screen_height);
+                SDL_RenderPresent(renderer);
+                while (SDL_PollEvent(&event)) {
+                    if (event.type == SDL_QUIT) {
+                        done = SDL_TRUE;
+                    }
+                }
+            }
+        }
+        if (renderer) {
+            SDL_DestroyRenderer(renderer);
+        }
+        if (window) {
+            SDL_DestroyWindow(window);
+        }
     }
-    Uint32 bgcolor = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
-    if (SDL_FillRect(screen, &(screen->clip_rect), bgcolor) == -1) {
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
+    SDL_Quit();
+    return 0;
 }
