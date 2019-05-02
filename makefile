@@ -1,7 +1,7 @@
 .PHONY: clean
 .PHONY: test
-CCFLAGS=-Wall -Wextra -Wshadow -Werror -std=gnu17 
-CC=clang
+CCFLAGS=-Wall -Wextra -Wshadow -Werror -std=gnu11 
+CC=gcc
 OUT=build/
 EXE=bin/
 SRC=src/
