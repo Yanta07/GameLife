@@ -71,3 +71,21 @@ void CreateGridBoard(
     CreateGrid(renderer, rows, cols, swidth, sheight);
     SDL_RenderPresent(renderer);
 }
+
+void DirectPress(
+        SDL_Event event, int* board, int cell_width, int cell_height, int rows)
+{
+    if (event.button.button == SDL_BUTTON_LEFT) {
+        int tx = event.button.x / cell_width;
+        int ty = event.button.y / cell_height;
+        switch (board[tx + ty * rows]) {
+        case ON:
+            board[tx + ty * rows] = OFF;
+            break;
+        case OFF:
+            board[tx + ty * rows] = ON;
+            break;
+        }
+    }
+    SDL_Delay(50);
+}
