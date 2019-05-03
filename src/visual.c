@@ -34,3 +34,15 @@ SDL_Rect* InitCell(int xr, int yc, int cellwidth, int cellheight)
     cell->h = cellheight;
     return cell;
 }
+
+void ShowBoard(
+        SDL_Renderer* renderer, int* b, int col, int row, int cellw, int cellh)
+{
+    SDL_SetRenderDrawColor(renderer, 10, 10, 10, SDL_ALPHA_OPAQUE);
+    for (int i = 0; i < col * row - 1; i++) {
+        if (b[i] == ON) {
+            SDL_Rect* cell = InitCell(i % row, i / row, cellw, cellh);
+            SDL_RenderFillRect(renderer, cell);
+        }
+    }
+}

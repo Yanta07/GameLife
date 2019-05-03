@@ -12,3 +12,5 @@ void CreateGrid(
         int screen_height);
 
 SDL_Rect* InitCell(int xr, int yc, int cellwidth, int cellheight);
+void ShowBoard(
+        SDL_Renderer* renderer, int* b, int col, int row, int cellw, int cellh);
