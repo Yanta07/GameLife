@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "include/common.h"
+#include "include/visual.h"
 
 void CreateGrid(
         SDL_Renderer* renderer, int rows, int cols, int swidth, int sheight)
@@ -33,4 +34,32 @@ SDL_Rect* InitCell(int xr, int yc, int cellwidth, int cellheight)
     cell->w = cellwidth;
     cell->h = cellheight;
     return cell;
+}
+
+void ShowBoard(
+        SDL_Renderer* renderer,
+        int* b,
+        int col,
+        int row,
+        int cellw,
+        int cellh,
+        int screen_width,
+        int screen_height)
+{
+    ClearWin(renderer);
+    SDL_SetRenderDrawColor(renderer, 10, 10, 10, SDL_ALPHA_OPAQUE);
+    for (int i = 0; i < col * row - 1; i++) {
+        if (b[i] == ON) {
+            SDL_Rect* cell = InitCell(i % row, i / row, cellw, cellh);
+            SDL_RenderFillRect(renderer, cell);
+        }
+    }
+    CreateGrid(renderer, row, col, screen_width, screen_height);
+    SDL_RenderPresent(renderer);
+}
+
+void ClearWin(SDL_Renderer* renderer)
+{
+    SDL_SetRenderDrawColor(renderer, 170, 150, 170, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(renderer);
 }

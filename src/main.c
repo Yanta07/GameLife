@@ -7,15 +7,14 @@
 #include <stdlib.h>
 
 const char* title = "Game of life";
-
 int main()
 {
     int paused = 1;
     //--------------------------------------
     const int screen_width = 640;
     const int screen_height = 480;
-    int rows = 6;
-    int cols = 6;
+    int rows = 10;
+    int cols = 10;
     int cell_width = screen_width / rows;
     int cell_height = screen_height / cols;
     int* board = InitBoard(rows, cols);
@@ -33,10 +32,9 @@ int main()
             screen_width,
             screen_height,
             SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     //--------------------------------------
-    SDL_SetRenderDrawColor(renderer, 170, 150, 170, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(renderer);
+    ClearWin(renderer);
     CreateGrid(renderer, rows, cols, screen_width, screen_height);
     SDL_RenderPresent(renderer);
     while (SDL_PollEvent(&event) || done == SDL_FALSE) {
@@ -57,21 +55,31 @@ int main()
             break;
         case SDL_MOUSEBUTTONDOWN:
             if (event.button.button == SDL_BUTTON_LEFT) {
-                if (event.button.y > (screen_height))
-                    break;
                 int tx = event.button.x / cell_width;
                 int ty = event.button.y / cell_height;
-                SDL_SetRenderDrawColor(renderer, 10, 10, 10, SDL_ALPHA_OPAQUE);
-                SDL_Rect* cell = InitCell(tx, ty, cell_width, cell_height);
-                SDL_RenderFillRect(renderer, cell);
-                CreateGrid(renderer, rows, cols, screen_width, screen_height);
-                SDL_RenderPresent(renderer);
-                SDL_Delay(20);
-                board[tx + ty * rows] = ON;
-                break;
-            default:
-                break;
+                switch (board[tx + ty * rows]) {
+                case ON:
+                    board[tx + ty * rows] = OFF;
+                    break;
+                case OFF:
+                    board[tx + ty * rows] = ON;
+                    break;
+                }
             }
+            SDL_Delay(50);
+            break;
+
+        default:
+            ShowBoard(
+                    renderer,
+                    board,
+                    cols,
+                    rows,
+                    cell_width,
+                    cell_height,
+                    screen_width,
+                    screen_height);
+            break;
         }
     }
     if (renderer)
