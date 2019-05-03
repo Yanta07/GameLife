@@ -1,15 +1,11 @@
-# Тут указывается используемый в проекте язык программирования, можно указать несколько
 language: c
 dist: xenial
 os: linux
 compiler: gcc
 before_install:
-    - wget https://www.libsdl.org/release/SDL2-2.0.5.tar.gz -O SDL2-2.0.5.tar.gz
-    - tar -xzvf SDL2-2.0.5.tar.gz
-    - sudo apt update
+    - sudo apt-get update 
+    - sudo apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev
     - sudo apt install make
-install:
-   - (cd SDL2-2.0.5 && ./configure && make && sudo make install)
 script: 
  - git ls-files src/ | xargs clang-format -i src/*.c 
  - git diff --exit-code
@@ -19,6 +15,6 @@ notifications:
     recipients:
       - liember@yandex.ru
     on_success: never # default: change
-    on_failure: never # default: always
+    on_failure: always # default: always
 
  
