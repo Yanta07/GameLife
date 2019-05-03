@@ -3,13 +3,13 @@ dist: xenial
 os: linux
 compiler: gcc
 before_install:
-    - sudo apt-get update 
-    - sudo apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev
-    - sudo apt install make
-script: 
- - git ls-files src/ | xargs clang-format -i src/*.c 
- - git diff --exit-code
- - make 
+  - sudo apt-get update 
+  - sudo apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev
+  - sudo apt install make
+script:
+  - git ls-files src/ | xargs clang-format -i src/*.c 
+  - git diff --exit-code
+  - make 
 notifications:
   email:
     recipients:
