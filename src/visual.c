@@ -63,3 +63,11 @@ void ClearWin(SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, 170, 150, 170, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 }
+
+void CreateGridBoard(
+        SDL_Renderer* renderer, int rows, int cols, int swidth, int sheight)
+{
+    ClearWin(renderer);
+    CreateGrid(renderer, rows, cols, swidth, sheight);
+    SDL_RenderPresent(renderer);
+}

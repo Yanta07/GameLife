@@ -11,6 +11,9 @@ void CreateGrid(
         int screen_width,
         int screen_height);
 
+void CreateGridBoard(
+        SDL_Renderer* renderer, int rows, int cols, int swidth, int sheight);
+
 void ShowBoard(
         SDL_Renderer* renderer,
         int* b,

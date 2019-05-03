@@ -33,10 +33,8 @@ int main()
             screen_height,
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    //--------------------------------------
-    ClearWin(renderer);
-    CreateGrid(renderer, rows, cols, screen_width, screen_height);
-    SDL_RenderPresent(renderer);
+    //--------------------------------------------------------------------
+    CreateGridBoard(renderer, rows, cols, screen_width, screen_height);
     while (SDL_PollEvent(&event) || done == SDL_FALSE) {
         switch (event.type) {
         case SDL_QUIT:
