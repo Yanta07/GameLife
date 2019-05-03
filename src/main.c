@@ -7,15 +7,14 @@
 #include <stdlib.h>
 
 const char* title = "Game of life";
-
 int main()
 {
     int paused = 1;
     //--------------------------------------
     const int screen_width = 640;
     const int screen_height = 480;
-    int rows = 6;
-    int cols = 6;
+    int rows = 10;
+    int cols = 10;
     int cell_width = screen_width / rows;
     int cell_height = screen_height / cols;
     int* board = InitBoard(rows, cols);
@@ -35,8 +34,7 @@ int main()
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     //--------------------------------------
-    SDL_SetRenderDrawColor(renderer, 170, 150, 170, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(renderer);
+    ClearWin(renderer);
     CreateGrid(renderer, rows, cols, screen_width, screen_height);
     SDL_RenderPresent(renderer);
     while (SDL_PollEvent(&event) || done == SDL_FALSE) {
@@ -72,11 +70,15 @@ int main()
             break;
 
         default:
-            SDL_SetRenderDrawColor(renderer, 170, 150, 170, SDL_ALPHA_OPAQUE);
-            SDL_RenderClear(renderer);
-            ShowBoard(renderer, board, cols, rows, cell_width, cell_height);
-            CreateGrid(renderer, rows, cols, screen_width, screen_height);
-            SDL_RenderPresent(renderer);
+            ShowBoard(
+                    renderer,
+                    board,
+                    cols,
+                    rows,
+                    cell_width,
+                    cell_height,
+                    screen_width,
+                    screen_height);
             break;
         }
     }
