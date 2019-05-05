@@ -2,15 +2,11 @@
 #include "include/logic.h"
 #include "include/visual.h"
 
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-const char* title = "Game of life";
 int main()
 {
     int paused = 1;
     //--------------------------------------
+    const char* title = "Game of life";
     const int screen_width = 640;
     const int screen_height = 480;
     int rows = 10;
@@ -33,10 +29,8 @@ int main()
             screen_height,
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    //--------------------------------------
-    ClearWin(renderer);
-    CreateGrid(renderer, rows, cols, screen_width, screen_height);
-    SDL_RenderPresent(renderer);
+    //--------------------------------------------------------------------
+    CreateGridBoard(renderer, rows, cols, screen_width, screen_height);
     while (SDL_PollEvent(&event) || done == SDL_FALSE) {
         switch (event.type) {
         case SDL_QUIT:
@@ -54,19 +48,7 @@ int main()
             }
             break;
         case SDL_MOUSEBUTTONDOWN:
-            if (event.button.button == SDL_BUTTON_LEFT) {
-                int tx = event.button.x / cell_width;
-                int ty = event.button.y / cell_height;
-                switch (board[tx + ty * rows]) {
-                case ON:
-                    board[tx + ty * rows] = OFF;
-                    break;
-                case OFF:
-                    board[tx + ty * rows] = ON;
-                    break;
-                }
-            }
-            SDL_Delay(50);
+            DirectPress(event, board, cell_width, cell_height, rows);
             break;
 
         default:
