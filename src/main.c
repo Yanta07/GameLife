@@ -1,17 +1,15 @@
+#include "include/common.h"
 #include "include/logic.h"
 #include "include/visual.h"
 
 int main()
 {
-    int paused = 1;
+    unsigned int lastTime = 0, currentTime, screen_width = 640,
+                 screen_height = screen_width, rows = 10, cols = rows,
+                 cell_width = screen_width / rows,
+                 cell_height = screen_height / cols, paused = 1;
     //--------------------------------------
     const char* title = "Game of life";
-    const int screen_width = 640;
-    const int screen_height = screen_width;
-    int rows = 10;
-    int cols = rows;
-    int cell_width = screen_width / rows;
-    int cell_height = screen_height / cols;
     int* board = InitBoard(rows, cols);
     //--------------
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -30,8 +28,7 @@ int main()
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     CreateGridBoard(renderer, rows, cols, screen_width, screen_height);
-    while (done == SDL_FALSE) {
-        SDL_PollEvent(&event);
+    while (SDL_PollEvent(&event) || sdone == SDL_FALSE) {
         switch (event.type) {
         case SDL_QUIT:
             done = SDL_TRUE;
@@ -55,17 +52,21 @@ int main()
             break;
 
         default:
-            if (paused == 0 && SDL_Ticks() % 100 == 0) {
-                Sim_ShowBoard(
-                        renderer,
-                        board,
-                        cols,
-                        rows,
-                        cell_width,
-                        cell_height,
-                        screen_width,
-                        screen_height);
-                Sim_Process(board, rows, cols);
+            if (paused == 0) {
+                currentTime = SDL_GetTicks();
+                if (currentTime > lastTime + FPS) {
+                    lastTime = currentTime;
+                    Sim_ShowBoard(
+                            renderer,
+                            board,
+                            cols,
+                            rows,
+                            cell_width,
+                            cell_height,
+                            screen_width,
+                            screen_height);
+                    Sim_Process(board, rows, cols);
+                }
             } else {
                 Sim_ShowBoard(
                         renderer,
