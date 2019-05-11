@@ -14,7 +14,7 @@ void CreateGrid(
 void CreateGridBoard(
         SDL_Renderer* renderer, int rows, int cols, int swidth, int sheight);
 
-void ShowBoard(
+void Sim_ShowBoard(
         SDL_Renderer* renderer,
         int* b,
         int col,
