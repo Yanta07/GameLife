@@ -8,9 +8,9 @@ int main()
     //--------------------------------------
     const char* title = "Game of life";
     const int screen_width = 640;
-    const int screen_height = 480;
+    const int screen_height = screen_width;
     int rows = 10;
-    int cols = 10;
+    int cols = rows;
     int cell_width = screen_width / rows;
     int cell_height = screen_height / cols;
     int* board = InitBoard(rows, cols);
@@ -21,6 +21,7 @@ int main()
     SDL_Event event;
     SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
+    //--------------------------------------------------------------------
     window = SDL_CreateWindow(
             title,
             SDL_WINDOWPOS_UNDEFINED,
@@ -29,9 +30,9 @@ int main()
             screen_height,
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    //--------------------------------------------------------------------
     CreateGridBoard(renderer, rows, cols, screen_width, screen_height);
-    while (SDL_PollEvent(&event) || done == SDL_FALSE) {
+    while (done == SDL_FALSE) {
+        SDL_PollEvent(&event);
         switch (event.type) {
         case SDL_QUIT:
             done = SDL_TRUE;
@@ -44,7 +45,7 @@ int main()
             } else if (
                     event.key.keysym.sym == SDLK_RSHIFT
                     || event.key.keysym.sym == SDLK_LSHIFT) {
-                // clear_board();
+                // clear_board(board);
             }
             break;
         case SDL_MOUSEBUTTONDOWN:
@@ -52,7 +53,7 @@ int main()
             break;
 
         default:
-            ShowBoard(
+            Sim_ShowBoard(
                     renderer,
                     board,
                     cols,
