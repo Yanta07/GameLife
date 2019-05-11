@@ -29,14 +29,14 @@ void CreateGrid(
 SDL_Rect* InitCell(int xr, int yc, int cellwidth, int cellheight)
 {
     struct SDL_Rect* cell = malloc(sizeof(SDL_Rect));
-    cell->x = cellwidth * xr + 2;
+    cell->x = cellwidth * xr;
     cell->y = cellheight * yc;
     cell->w = cellwidth;
     cell->h = cellheight;
     return cell;
 }
 
-void ShowBoard(
+void Sim_ShowBoard(
         SDL_Renderer* renderer,
         int* b,
         int col,
