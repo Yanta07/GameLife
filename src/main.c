@@ -1,4 +1,3 @@
-#include "include/common.h"
 #include "include/logic.h"
 #include "include/visual.h"
 
@@ -38,14 +37,17 @@ int main()
             done = SDL_TRUE;
             break;
         case SDL_KEYDOWN:
-            if (event.key.keysym.sym == SDLK_KP_ENTER) {
-                paused = !paused;
+            if (event.key.keysym.sym == SDLK_RETURN) {
+                if (paused == 0) {
+                    paused = 1;
+                } else {
+                    paused = 0;
+                }
             } else if (event.key.keysym.sym == SDLK_ESCAPE) {
                 done = SDL_TRUE;
             } else if (
                     event.key.keysym.sym == SDLK_RSHIFT
                     || event.key.keysym.sym == SDLK_LSHIFT) {
-                // clear_board(board);
             }
             break;
         case SDL_MOUSEBUTTONDOWN:
@@ -53,15 +55,28 @@ int main()
             break;
 
         default:
-            Sim_ShowBoard(
-                    renderer,
-                    board,
-                    cols,
-                    rows,
-                    cell_width,
-                    cell_height,
-                    screen_width,
-                    screen_height);
+            if (paused == 0 && SDL_Ticks() % 100 == 0) {
+                Sim_ShowBoard(
+                        renderer,
+                        board,
+                        cols,
+                        rows,
+                        cell_width,
+                        cell_height,
+                        screen_width,
+                        screen_height);
+                Sim_Process(board, rows, cols);
+            } else {
+                Sim_ShowBoard(
+                        renderer,
+                        board,
+                        cols,
+                        rows,
+                        cell_width,
+                        cell_height,
+                        screen_width,
+                        screen_height);
+            }
             break;
         }
     }

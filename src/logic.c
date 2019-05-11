@@ -59,12 +59,18 @@ int Sim_Process(int* board, int rows, int cols)
     }
     for (int i = 0; i < rows * cols - 1; i++) {
         int sum = 0;
-        sum += Sim_BoardGetUpper(buf, i, rows);
-        sum += Sim_BoardGetLower(buf, i, rows);
-        sum += Sim_BoardGetLeft(buf, i, rows);
-        sum += Sim_BoardGetRight(buf, i, rows);
-        if (sum > 2) {
-            board[i] = 1;
+        // sum += Sim_BoardGetUpper(buf, i, rows);
+        // sum += Sim_BoardGetLower(buf, i, rows);
+        // sum += Sim_BoardGetLeft(buf, i, rows);
+        // sum += Sim_BoardGetRight(buf, i, rows);
+        sum = buf[i - rows - 1] + buf[i - rows] + buf[i - rows + 1] + buf[i - 1]
+                + buf[i + 1] + buf[i + rows - 1] + buf[i + rows]
+                + buf[i + rows + 1];
+        if (sum >= 2) {
+            if (sum == 2 || sum == 3) {
+                board[i] = 1;
+            } else
+                board[i] = 0;
         } else if (sum < 2) {
             board[i] = 0;
         }
