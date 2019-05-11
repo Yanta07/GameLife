@@ -28,7 +28,7 @@ int main()
             SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     CreateGridBoard(renderer, rows, cols, screen_width, screen_height);
-    while (SDL_PollEvent(&event) || sdone == SDL_FALSE) {
+    while (SDL_PollEvent(&event) || done == SDL_FALSE) {
         switch (event.type) {
         case SDL_QUIT:
             done = SDL_TRUE;
@@ -42,9 +42,8 @@ int main()
                 }
             } else if (event.key.keysym.sym == SDLK_ESCAPE) {
                 done = SDL_TRUE;
-            } else if (
-                    event.key.keysym.sym == SDLK_RSHIFT
-                    || event.key.keysym.sym == SDLK_LSHIFT) {
+            } else if (event.key.keysym.sym == SDLK_LSHIFT) {
+                Sim_Process(board, rows, cols);
             }
             break;
         case SDL_MOUSEBUTTONDOWN:
@@ -65,7 +64,6 @@ int main()
                             cell_height,
                             screen_width,
                             screen_height);
-                    Sim_Process(board, rows, cols);
                 }
             } else {
                 Sim_ShowBoard(
